@@ -112,6 +112,7 @@
     }
 
     function appendDecimal() {
+      // Prevent multiple decimals in one number
       if (!currentInput.includes('.')) {
         currentInput += '.';
         updateDisplay();
@@ -119,13 +120,15 @@
     }
 
     function chooseOperation(op) {
-      if (currentInput === '') return;
+      if (currentInput === '') return; // Prevent choosing operation with no number
+
       if (previousInput !== '') {
-        calculate();
+        calculate(); // If there was a previous operation, calculate it first
       }
+
       operation = op;
       previousInput = currentInput;
-      currentInput = '';
+      currentInput = ''; // Clear current input for next number
     }
 
     function calculate() {
@@ -133,7 +136,7 @@
       const prev = parseFloat(previousInput);
       const current = parseFloat(currentInput);
 
-      if (isNaN(prev) || isNaN(current)) return;
+      if (isNaN(prev) || isNaN(current)) return; // Avoid calculation if inputs are invalid
 
       switch (operation) {
         case '+':
