@@ -1,5 +1,5 @@
 <html>
-<head></head>
+<head>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -82,6 +82,7 @@
             background-color: #f57c00;
         }
     </style>
+</head>
 <body>
     <div class="calculator">
         <input type="text" id="display" class="display" disabled>
@@ -107,5 +108,38 @@
             <button class="button" onclick="appendNumber('0')">0</button>
         </div>
     </div>
+
+    <script>
+        let currentInput = '';
+        
+        // Append number or operator to the display
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('display').value = currentInput;
+        }
+
+        // Append operator to the display
+        function appendOperation(operator) {
+            currentInput += ` ${operator} `;
+            document.getElementById('display').value = currentInput;
+        }
+
+        // Clear the display
+        function clearDisplay() {
+            currentInput = '';
+            document.getElementById('display').value = '';
+        }
+
+        // Calculate the result of the expression
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();
+                document.getElementById('display').value = currentInput;
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+                currentInput = '';
+            }
+        }
+    </script>
 </body>
 </html>
